@@ -1,0 +1,13 @@
+/* src/components/pages/IndexPage/IndexPage.module.css */
+.indexPage {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .indexPage h1 {
+    color: #333;
+  }
+  
+  .indexPage p {
+    color: #666;
+  }
