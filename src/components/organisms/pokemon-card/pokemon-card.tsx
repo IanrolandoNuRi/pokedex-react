@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
+import { getPokedex, getKantoPokedex, getPokemon, getPokemonSpecies } from '../../../services/pokeapi';
 import styles from './pokemon-card.module.css';
 import TitlePokemonCard from '../../molecules/title-pokemon-card/title-pokemon-card';
 import { typeBackgroundColors } from '../../../types/typeColors';
@@ -10,56 +10,109 @@ import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circle
 interface PokemonDetail {
   id: number;
   abilities: string[];
+  description: string;
   height: number;
   name: string;
   types: string[];
   weight: number;
 }
 
-const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
-  <div className={styles.pokemonAttribute}>
-    <TextCard content={label} fontWeight="bold" color="blue" />
-    <TextCard content={value} color="blue" />
-  </div>
-);
+const Pokedex: React.FC = () => {
+  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetail[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-  const cardStyle = {
-    borderColor: typeBackgroundColors[pokemon.types[0]],
-  };
+  useEffect(() => {
+    const fetchPokedexData = async () => {
+      try {
+        const pokedexData = await getPokedex();
+        const kantoPokedex = pokedexData.results.find((pokedex: any) => pokedex.name === 'kanto');
+
+        if (kantoPokedex) {
+          const kantoData = await getKantoPokedex(kantoPokedex.url);
+          const kantoEntries = kantoData.pokemon_entries;
+
+          const detailsPromises = kantoEntries.map((entry: any) =>
+            getPokemon(entry.entry_number)
+          );
+          const detailedData = await Promise.all(detailsPromises);
+
+          const detailedPokemon = await Promise.all(
+            detailedData.map(async (data: any) => {
+              const speciesData = await getPokemonSpecies(data.id);
+              const description = speciesData.flavor_text_entries
+                .filter((entry: any) => entry.language.name === 'es')
+                .map((entry: any) => entry.flavor_text)
+                .join(' ');
+
+              return {
+                id: data.id,
+                abilities: data.abilities.map((ability: any) => ability.ability.name),
+                description,
+                height: data.height,
+                name: data.name,
+                types: data.types.map((types: any) => types.type.name),
+                weight: data.weight,
+              };
+            })
+          );
+
+          setPokemonDetails(detailedPokemon);
+        } else {
+          setError('Kanto Pokedex not found');
+        }
+      } catch (error) {
+        setError('Failed to fetch Pokedex data');
+      }
+    };
+
+    fetchPokedexData();
+  }, []);
+
+  const memoizedPokemonDetails = useMemo(() => pokemonDetails, [pokemonDetails]);
+
+  if (error) {
+    return <div className={styles.pokedex}>Error: {error}</div>;
+  }
+
+  if (memoizedPokemonDetails.length === 0) {
+    return <div className={styles.pokedex}>Loading...</div>;
+  }
 
   return (
-    <div className={styles.card} style={cardStyle}>
-      <div className={styles.pokemonCardGrid}>
-        <div className={styles.headerCardGrid}>
-          <TextCard content={`#${pokemon.id}`} headingLevel="h5"/>
-          <ColorCircles
-            circles={pokemon.types}
-          />
-        </div>
-        <TextCard content={pokemon.name} headingLevel="h3" alignment="center" textTransform="capitalize" />
-        <div className={styles.imageContainer}>
-          <ImageWithBackground pokemonId={pokemon.id} />
-        </div>
-        <div className={styles.attribute}>
-          <PokemonAttribute label="Height:" value={String(pokemon.height)} />
-          <PokemonAttribute label="Weight:" value={String(pokemon.weight)} />
-        </div>
-
-
-        <div className={styles.pokemonAttribute}>
-          <TextCard content="Abilities:" fontWeight="bold" color="blue" />
-          {pokemon.abilities.map((ability) => (
-            <TextCard key={ability} content={ability} color="blue" />
-          ))}
-        </div>
-        <div className={styles.pokemonAttribute}>
-          <TextCard content="Types:" fontWeight="bold" color="blue" />
-          {pokemon.types.map((type) => (
-            <TextCard key={type} content={type} color="blue" />
-          ))}
-        </div>
-      </div>
+    <div className={styles.card}>
+      <TitlePokemonCard
+        pokemonId={pokemon.id}
+        pokemonTypes={pokemon.types}
+      />
+      <h3>{pokemon.name}</h3>
+      <ImageComponent
+          src={pokemon.id}
+      />
+      <p><strong>Height:</strong> {pokemon.height}</p>
+      <p><strong>Weight:</strong> {pokemon.weight}</p>
+      <p><strong>Abilities:</strong></p>
+      <ul>
+        {memoizedPokemonDetails.map((pokemon) => (
+          <li key={pokemon.id}>
+            <h3>{pokemon.name}</h3>
+            <p><strong>Description:</strong> {pokemon.description}</p>
+            <p><strong>Height:</strong> {pokemon.height}</p>
+            <p><strong>Weight:</strong> {pokemon.weight}</p>
+            <p><strong>Abilities:</strong></p>
+            <ul>
+              {pokemon.abilities.map((ability) => (
+                <li key={ability}>{ability}</li>
+              ))}
+            </ul>
+            <p><strong>Types:</strong></p>
+            <ul>
+              {pokemon.types.map((type) => (
+                <li key={type}>{type}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
