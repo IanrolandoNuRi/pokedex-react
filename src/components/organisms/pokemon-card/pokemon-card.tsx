@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { getPokedex, getKantoPokedex, getPokemon, getPokemonSpecies } from '../../../services/pokeapi';
+import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
 import styles from './pokemon-card.module.css';
 
 interface PokemonDetail {
   id: number;
   abilities: string[];
-  description: string;
   height: number;
   name: string;
   types: string[];
@@ -20,36 +19,26 @@ const Pokedex: React.FC = () => {
     const fetchPokedexData = async () => {
       try {
         const pokedexData = await getPokedex();
-        const kantoPokedex = pokedexData.results.find((pokedex: any) => pokedex.name === 'kanto');
+        const kantoPokedex = pokedexData.results.find((pokedex: { name: string }) => pokedex.name === 'kanto');
 
         if (kantoPokedex) {
           const kantoData = await getKantoPokedex(kantoPokedex.url);
           const kantoEntries = kantoData.pokemon_entries;
 
-          const detailsPromises = kantoEntries.map((entry: any) =>
-            getPokemon(entry.entry_number)
-          );
-          const detailedData = await Promise.all(detailsPromises);
+          const pokemonIds = kantoEntries.map((entry: { entry_number: number }) => entry.entry_number);
+          const allPokemonDetails = await getAllPokemonDetails(pokemonIds);
+          console.log("here ",allPokemonDetails)
 
-          const detailedPokemon = await Promise.all(
-            detailedData.map(async (data: any) => {
-              const speciesData = await getPokemonSpecies(data.id);
-              const description = speciesData.flavor_text_entries
-                .filter((entry: any) => entry.language.name === 'es')
-                .map((entry: any) => entry.flavor_text)
-                .join(' ');
-
-              return {
-                id: data.id,
-                abilities: data.abilities.map((ability: any) => ability.ability.name),
-                description,
-                height: data.height,
-                name: data.name,
-                types: data.types.map((types: any) => types.type.name),
-                weight: data.weight,
-              };
-            })
-          );
+          const detailedPokemon = allPokemonDetails.map(({ pokemon }: any) => {
+            return {
+              id: pokemon.id,
+              abilities: pokemon.abilities.map((ability: { ability: { name: string } }) => ability.ability.name),
+              height: pokemon.height,
+              name: "pokemon.name",
+              types: pokemon.types.map((types: { type: { name: string } }) => types.type.name),
+              weight: pokemon.weight,
+            };
+          });
 
           setPokemonDetails(detailedPokemon);
         } else {
@@ -80,7 +69,6 @@ const Pokedex: React.FC = () => {
         {memoizedPokemonDetails.map((pokemon) => (
           <li key={pokemon.id}>
             <h3>{pokemon.name}</h3>
-            <p><strong>Description:</strong> {pokemon.description}</p>
             <p><strong>Height:</strong> {pokemon.height}</p>
             <p><strong>Weight:</strong> {pokemon.weight}</p>
             <p><strong>Abilities:</strong></p>
