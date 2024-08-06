@@ -1,0 +1,34 @@
+/* src/components/atoms/Title.css */
+
+.title {
+    font-family: 'Arial, sans-serif';
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .title.h1 {
+    font-size: 2em;
+  }
+  
+  .title.h2 {
+    font-size: 1.75em;
+  }
+  
+  .title.h3 {
+    font-size: 1.5em;
+  }
+  
+  .title.h4 {
+    font-size: 1.25em;
+  }
+  
+  .title.h5 {
+    font-size: 1em;
+  }
+  
+  .title.h6 {
+    font-size: 0.75em;
+  }
+
+
+  
