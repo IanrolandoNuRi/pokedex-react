@@ -2,10 +2,9 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
 import styles from './pokemon-card.module.css';
 import TitlePokemonCard from '../../molecules/title-pokemon-card/title-pokemon-card';
-import { typeBackgroundColors } from '../../../types/typeColors';
+import {typeBackgroundColors} from '../../../types/typeColors';
 import ImageWithBackground from '../../molecules/image-with-background/image-with-background';
 import TextCard from '../../atoms/text-card/text-card';
-import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
 
 interface PokemonDetail {
   id: number;
@@ -16,66 +15,24 @@ interface PokemonDetail {
   weight: number;
 }
 
-const Pokedex: React.FC = () => {
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetail[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchPokedexData = async () => {
-      try {
-        const pokedexData = await getPokedex();
-        const kantoPokedex = pokedexData.results.find((pokedex: { name: string }) => pokedex.name === 'kanto');
-
-        if (kantoPokedex) {
-          const kantoData = await getKantoPokedex(kantoPokedex.url);
-          const kantoEntries = kantoData.pokemon_entries;
-
-          const pokemonIds = kantoEntries.map((entry: { entry_number: number }) => entry.entry_number);
-          const allPokemonDetails = await getAllPokemonDetails(pokemonIds);
-          console.log("here ",allPokemonDetails)
-
-          const detailedPokemon = allPokemonDetails.map(({ pokemon }: any) => {
-            return {
-              id: pokemon.id,
-              abilities: pokemon.abilities.map((ability: { ability: { name: string } }) => ability.ability.name),
-              height: pokemon.height,
-              name: "pokemon.name",
-              types: pokemon.types.map((types: { type: { name: string } }) => types.type.name),
-              weight: pokemon.weight,
-            };
-          });
-
-          setPokemonDetails(detailedPokemon);
-        } else {
-          setError('Kanto Pokedex not found');
-        }
-      } catch (error) {
-        setError('Failed to fetch Pokedex data');
-      }
-    };
-
-    fetchPokedexData();
-  }, []);
-
-  const memoizedPokemonDetails = useMemo(() => pokemonDetails, [pokemonDetails]);
-
-  if (error) {
-    return <div className={styles.pokedex}>Error: {error}</div>;
-  }
-
-  if (memoizedPokemonDetails.length === 0) {
-    return <div className={styles.pokedex}>Loading...</div>;
-  }
-
+const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+  const cardStyle = {
+    borderColor: typeBackgroundColors[pokemon.types[0]],
+  };
   return (
-    <div className={styles.card}>
+    <div className={styles.card} style={cardStyle}>
       <TitlePokemonCard
         pokemonId={pokemon.id}
         pokemonTypes={pokemon.types}
       />
-      <h3>{pokemon.name}</h3>
-      <ImageComponent
-          src={pokemon.id}
+      <TextCard
+        content={pokemon.name}
+        headingLevel='h3'
+        alignment='center'
+        textTransform='capitalize'
+      />
+      <ImageWithBackground
+          pokemonId={pokemon.id}
       />
       <p><strong>Height:</strong> {pokemon.height}</p>
       <p><strong>Weight:</strong> {pokemon.weight}</p>

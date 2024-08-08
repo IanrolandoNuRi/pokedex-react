@@ -1,4 +1,5 @@
 .container {
+    width: 150px;
     height: 150px;
     display: flex; /* Arrange children in a row */
     align-items: center; /* Vertically center items */
