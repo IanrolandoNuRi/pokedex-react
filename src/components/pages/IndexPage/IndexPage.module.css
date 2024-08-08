@@ -1,8 +1,7 @@
 /* src/components/pages/IndexPage/IndexPage.module.css */
 .indexPage {
-    padding: 20px;
     text-align: center;
-    background-color: #FFFFFF;
+    background-color: #000000;
   }
   
   .indexPage h1 {

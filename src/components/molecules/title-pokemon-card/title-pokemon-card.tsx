@@ -15,6 +15,7 @@ const TitlePokemonCard: React.FC<TitlePokemonCardProps> = ({pokemonId, pokemonTy
             <TextCard
                 content={pokemonStringId}
                 alignment="left"
+                headingLevel="h5"
             />
             <ColorCircles
                 circles={pokemonTypes}

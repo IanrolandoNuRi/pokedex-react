@@ -1,4 +1,4 @@
-const typeColors: { [key: string]: string } = {
+export const typeColors: { [key: string]: string } = {
     grass: "#78C850",
     poison: "#A040A0",
     fire: "#F08030",
@@ -20,4 +20,23 @@ const typeColors: { [key: string]: string } = {
     // Add more types as needed
 };
 
-export default typeColors;
+export const typeBackgroundColors: { [key: string]: string } = {
+    grass: "#A8D5A2",
+    poison: "#D3A0D3",
+    fire: "#F4B983",
+    water: "#A2B9F0",
+    bug: "#C4D89B",
+    normal: "#D1D0B6",
+    electric: "#F9E4A6",
+    ground: "#E4D7A1",
+    fairy: "#F3BCC3",
+    fighting: "#D6A3A1",
+    psychic: "#F7A3A8",
+    rock: "#D0BCA3",
+    ghost: "#9D8FBF",
+    ice: "#B2E2E2",
+    dragon: "#9B8CF7",
+    dark: "#B9A89E",
+    steel: "#D0D0E8",
+    flying: "#B9AEE0"
+};

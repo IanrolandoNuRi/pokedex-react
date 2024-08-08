@@ -3,32 +3,40 @@
 .title {
     font-family: 'Arial, sans-serif';
     color: #333;
+  }
+
+.common-margin {
     margin: 10px 0;
-  }
-  
-  .title.h1 {
-    font-size: 2em;
-  }
-  
-  .title.h2 {
-    font-size: 1.75em;
-  }
-  
-  .title.h3 {
-    font-size: 1.5em;
-  }
-  
-  .title.h4 {
-    font-size: 1.25em;
-  }
-  
-  .title.h5 {
-    font-size: 1em;
-  }
-  
-  .title.h6 {
-    font-size: 0.75em;
-  }
+}
+
+.h1 {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.h2 {
+  font-size: 1.75em;
+}
+
+.h3 {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 1.5em;
+}
+
+.h4 {
+  font-size: 1.25em;
+}
+
+.h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1em;
+}
+
+.h6 {
+  font-size: 0.75em;
+}
 
 
   

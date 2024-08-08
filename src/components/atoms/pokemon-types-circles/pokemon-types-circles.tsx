@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./pokemon-types-circles.module.css";
-import typeColors from "../../../types/typeColors";
+import {typeColors} from "../../../types/typeColors";
 
 interface ColorCirclesProps {
     circles: string[];

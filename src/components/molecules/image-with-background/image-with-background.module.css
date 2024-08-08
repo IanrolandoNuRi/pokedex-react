@@ -1,0 +1,26 @@
+.container {
+    width: 150px;
+    height: 150px;
+    display: flex; /* Arrange children in a row */
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Center items horizontally */
+    position: relative; /* Necessary for absolute positioning of the circle */
+}
+
+.circle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    background: radial-gradient(circle, rgb(255, 255, 255), rgb(126, 127, 133)); 
+    /* transform: translate(-60px); Center the circle */
+    border-radius: 50%; /* Creates the circle shape */
+    z-index: 0; /* Ensure the circle is behind the image */
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+    z-index: 1; 
+}
+

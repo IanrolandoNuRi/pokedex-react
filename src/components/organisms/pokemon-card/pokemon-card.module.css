@@ -1,0 +1,24 @@
+.card {
+    /* border: 3px solid #ec190ac0;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    background-color: var(--background-color);
+    color: var(--text-color); */
+    margin-top: 10px;  /* Adjusts the space above the card */
+    margin-bottom: 10px;
+    margin-left: 10px;  /* Adjusts the space above the card */
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 233, 36, 0.788);
+    border: 3px solid rgb(255, 217, 0);
+    width: 200px; /* Fixed width for desktop */
+    max-width: 100%; /* Responsive on smaller screens */
+    height: 600px; /* Fixed height */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
