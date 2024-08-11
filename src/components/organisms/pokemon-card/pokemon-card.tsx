@@ -1,25 +1,23 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
+import React from 'react';
 import styles from './pokemon-card.module.css';
-import TitlePokemonCard from '../../molecules/title-pokemon-card/title-pokemon-card';
 import { typeBackgroundColors } from '../../../types/typeColors';
 import ImageWithBackground from '../../molecules/image-with-background/image-with-background';
 import TextCard from '../../atoms/text-card/text-card';
 import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
 
-interface PokemonDetail {
-  id: number;
-  abilities: string[];
-  height: number;
-  name: string;
-  types: string[];
-  weight: number;
-}
+// interface PokemonDetail {
+//   id: number;
+//   abilities: string[];
+//   height: number;
+//   name: string;
+//   types: string[];
+//   weight: number;
+// }
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
   <div className={styles.pokemonAttribute}>
-    <TextCard content={label} fontWeight="bold" color="blue" />
-    <TextCard content={value} color="blue" />
+    <TextCard content={label} fontWeight="bold"/>
+    <TextCard content={value}/>
   </div>
 );
 
@@ -42,22 +40,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
           <ImageWithBackground pokemonId={pokemon.id} />
         </div>
         <div className={styles.attribute}>
-          <PokemonAttribute label="Height:" value={String(pokemon.height)} />
-          <PokemonAttribute label="Weight:" value={String(pokemon.weight)} />
+          <PokemonAttribute label="Height:&nbsp;" value={String(pokemon.height/10) + " m."} />
+          <PokemonAttribute label="Weight:&nbsp;" value={String(pokemon.weight/10) + " kg."} />
         </div>
-
-
-        <div className={styles.pokemonAttribute}>
-          <TextCard content="Abilities:" fontWeight="bold" color="blue" />
-          {pokemon.abilities.map((ability) => (
-            <TextCard key={ability} content={ability} color="blue" />
-          ))}
-        </div>
-        <div className={styles.pokemonAttribute}>
-          <TextCard content="Types:" fontWeight="bold" color="blue" />
-          {pokemon.types.map((type) => (
-            <TextCard key={type} content={type} color="blue" />
-          ))}
+        <div className={styles.example}>
+          <PokemonAttribute label="Abilities:" value={
+            pokemon.abilities.map((ability:string) => ability)} />
+          <PokemonAttribute label="Types:" value={
+            pokemon.types.map((type:string) => type)} />
         </div>
       </div>
     </div>
