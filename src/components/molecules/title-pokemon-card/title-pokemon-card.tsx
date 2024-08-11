@@ -4,22 +4,36 @@ import ColorCircles from "../../atoms/pokemon-types-circles/pokemon-types-circle
 import styles from "./title-pokemon-card.module.css"
 
 interface TitlePokemonCardProps{
-    pokemonId: number,
-    pokemonTypes: string[],
+  primaryText?: React.ReactNode[];
+  secondaryText?: string;
+  pokemonTypes?: string[];
+  justifyContent?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
+  flexDirection?: 'column'
 }
 
-const TitlePokemonCard: React.FC<TitlePokemonCardProps> = ({pokemonId, pokemonTypes})  => {
-    const pokemonStringId: string = "#" + pokemonId;
+const TitlePokemonCard: React.FC<TitlePokemonCardProps> = ({
+  primaryText,
+  secondaryText,
+  pokemonTypes,
+  justifyContent,
+  flexDirection,
+})  => {
     return(
-        <div className={styles.container}>
-            <TextCard
-                content={pokemonStringId}
-                alignment="left"
-            />
-            <ColorCircles
-                circles={pokemonTypes}
-            />
-        </div>
+        <div className={styles.container} style={{ justifyContent, flexDirection }}>
+        {primaryText && primaryText}
+        {secondaryText && (
+          <TextCard
+            content={secondaryText}
+            alignment="left"
+            headingLevel="h6"
+          />
+        )}
+        {pokemonTypes && (
+          <ColorCircles
+            circles={pokemonTypes}
+          />
+        )}
+      </div>
     )
 }
 

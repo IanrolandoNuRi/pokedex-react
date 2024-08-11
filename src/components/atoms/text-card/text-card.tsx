@@ -6,18 +6,32 @@ interface TextCardProps {
     alignment?: 'left' | 'center' | 'right';
     fontFamily?: string;
     color?: string;
+    fontWeight?: 'bold' | 'normal';
+    textTransform?: 'uppercase' | 'lowercase' | 'capitalize';
+    headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 
-const TextCard: React.FC<TextCardProps> = ({ content, alignment, fontFamily, color})  => {
+const TextCard: React.FC<TextCardProps> = ({ 
+    content,
+    alignment,
+    fontFamily,
+    color,
+    textTransform,
+    headingLevel="h5",
+    fontWeight
+})  => {
     const cardStyle = {
         textAlign : alignment as "left" | "center" |"right",
         fontFamily,
         color,
+        textTransform,
+        headingLevel,
+        fontWeight
     };
 
     return (
-        <div className="syles.card" style={cardStyle}>
-            <p className={styles.content}>{content}</p>
+        <div className={styles.card} style={cardStyle}>
+            <p className={styles[headingLevel]}>{content}</p>
         </div>
     )
 }

@@ -1,10 +1,10 @@
-const typeColors: { [key: string]: string } = {
+export const typeColors: { [key: string]: string } = {
     grass: "#78C850",
-    poison: "#A040A0",
+    poison: "#9141cb",
     fire: "#F08030",
-    water: "#6890F0",
-    bug: "#A8B820",
-    normal: "#A8A878",
+    water: "#2980ef",
+    bug: "#91a119",
+    normal: "#9fa19f",
     electric: "#F8D030",
     ground: "#E0C068",
     fairy: "#EE99AC",
@@ -16,8 +16,27 @@ const typeColors: { [key: string]: string } = {
     dragon: "#7038F8",
     dark: "#705848",
     steel: "#B8B8D0",
-    flying: "#A890F0",
+    flying: "#81b9ef",
     // Add more types as needed
 };
 
-export default typeColors;
+export const typeBackgroundColors: { [key: string]: string } = {
+    grass: "#A8D5A2",
+    poison: "#D3A0D3",
+    fire: "#F4B983",
+    water: "#A2B9F0",
+    bug: "#C4D89B",
+    normal: "#D1D0B6",
+    electric: "#F9E4A6",
+    ground: "#E4D7A1",
+    fairy: "#F3BCC3",
+    fighting: "#D6A3A1",
+    psychic: "#F7A3A8",
+    rock: "#D0BCA3",
+    ghost: "#9D8FBF",
+    ice: "#B2E2E2",
+    dragon: "#9B8CF7",
+    dark: "#B9A89E",
+    steel: "#D0D0E8",
+    flying: "#B9AEE0"
+};

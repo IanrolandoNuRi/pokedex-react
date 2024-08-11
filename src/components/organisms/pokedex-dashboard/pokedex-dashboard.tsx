@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
 import styles from './pokedex-dashboard.module.css';
 import PokemonCard from '../pokemon-card/pokemon-card';
+import TextCard from '../../atoms/text-card/text-card';
 
 interface PokemonDetail {
   id: number;
@@ -61,8 +62,15 @@ const Pokedex: React.FC = () => {
   }
 
   return (
-    <div className={styles.pokedex}>
-      <h2>Kanto Pokedex</h2>
+    <div className={styles.container}>
+      {/* 
+      This should be move to another page or template
+      <TextCard
+        content={"kanto pokedex"}
+        headingLevel='h2'
+        alignment='center'
+        textTransform='capitalize'
+      /> */}
       {memoizedPokemonDetails.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
