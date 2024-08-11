@@ -19,16 +19,21 @@ const TitlePokemonCard: React.FC<TitlePokemonCardProps> = ({
   flexDirection,
 })  => {
     return(
-        <div className={styles.container}>
-            <TextCard
-                content={pokemonStringId}
-                alignment="left"
-                headingLevel="h5"
-            />
-            <ColorCircles
-                circles={pokemonTypes}
-            />
-        </div>
+        <div className={styles.container} style={{ justifyContent, flexDirection }}>
+        {primaryText && primaryText}
+        {secondaryText && (
+          <TextCard
+            content={secondaryText}
+            alignment="left"
+            headingLevel="h6"
+          />
+        )}
+        {pokemonTypes && (
+          <ColorCircles
+            circles={pokemonTypes}
+          />
+        )}
+      </div>
     )
 }
 
