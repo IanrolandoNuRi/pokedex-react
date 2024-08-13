@@ -5,14 +5,6 @@ import ImageWithBackground from '../../molecules/image-with-background/image-wit
 import TextCard from '../../atoms/text-card/text-card';
 import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
 
-// interface PokemonDetail {
-//   id: number;
-//   abilities: string[];
-//   height: number;
-//   name: string;
-//   types: string[];
-//   weight: number;
-// }
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
   <div className={styles.attribute}>
@@ -45,8 +37,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
     // backgroundColor: cardTypesColors[pokemonType]?.background_attribute || '#FFF',
     background: `linear-gradient(
                   135deg,
-                  ${cardTypesColors[pokemonType]?.primary_background_attributes_list || '#90C98D'} 0%,
-                  ${cardTypesColors[pokemonType]?.secondary_background_attributes_list || '#90C98D'} 100%)`,
+                  ${cardTypesColors[pokemonType]?.primary_background_attributes_list || '#FFF'} 0%,
+                  ${cardTypesColors[pokemonType]?.secondary_background_attributes_list || '#FFF'} 100%)`,
     color: cardTypesColors[pokemonType]?.attributes_color || '#FFF',
   };
 

@@ -15,7 +15,6 @@ interface ImageWithBackgroundComponentProps {
         marginTop,
         marginBottom
     };
-    //   return <img src={process.env.PUBLIC_URL + src} alt={alt} className={className} />;
       return (
       <div className={styles.container} style={cardStyle}>
         <ImageComponent
