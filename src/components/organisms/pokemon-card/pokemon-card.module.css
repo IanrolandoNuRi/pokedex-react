@@ -1,53 +1,67 @@
+:root {
+  --primary-color: rgb(255, 217, 0);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --highlight-shadow-color: rgba(255, 233, 36, 0.788);
+}
+
 .card {
-  /* border: 3px solid #ec190ac0;
-  padding: 16px;
-  margin: 16px;
-  border-radius: 8px;
-  background-color: var(--background-color);
-  color: var(--text-color); */
-  margin-top: 10px;  /* Adjusts the space above the card */
-  margin-bottom: 10px;
-  margin-left: 10px;  /* Adjusts the space above the card */
-  margin-right: 10px;
+  margin: 10px;
+  padding: 12px 10px;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(255, 233, 36, 0.788);
-  border: 3px solid rgb(255, 217, 0);
-  width: 200px; /* Fixed width for desktop */
-  max-width: 100%; /* Responsive on smaller screens */
-  height: 350px; /* Fixed height */
-  padding: 10px;
-  /* flex-direction: column; */
+  box-shadow: 0 4px 8px var(--shadow-color), 0 4px 8px var(--highlight-shadow-color);
+  border: 3px solid var(--primary-color);
+  max-width: 229px;
+  min-height: 350px;
+  width: 235px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px var(--shadow-color);
 }
 
 
 .headerCardGrid{
   display: flex; /* Arrange children in a row */
-  align-items: center; /* Vertically center items */
-  justify-content: center; /* Center items horizontally */
-  position: relative; /* Necessary for absolute positioning of the circle */
   justify-content: space-between;
 }
 
 .attribute{
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
+  gap: 2px;
 }
 
-.example{
+.pokemonAttributesList{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
   position: relative;
+  background: linear-gradient(135deg, #FFFBFB 0%, #90C98D 100%);
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 3px 10px; /* Espaciado interno para mejor legibilidad */
+  color: #387F39; /* Color de texto para contrastar con el fondo */
 }
 
-.pokemonAttribute{
+.example1{
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  
+}
+
+.pokemonAttribute {
+  display: flex;
+  gap: 8px;
+  justify-content: space-evenly;
+  position: relative;
+  background: #90C98D; /* Gradiente suave */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 3px 10px; /* Espaciado interno para mejor legibilidad */
+  color: #333; /* Color de texto para contrastar con el fondo */
 }

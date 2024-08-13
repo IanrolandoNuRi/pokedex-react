@@ -1,5 +1,5 @@
 .container {
-    height: 150px;
+    height: 170px;
     display: flex; /* Arrange children in a row */
     align-items: center; /* Vertically center items */
     justify-content: center; /* Center items horizontally */
@@ -8,8 +8,8 @@
 
 .circle {
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     align-items: center;
     background: radial-gradient(circle, rgb(255, 255, 255), rgb(126, 127, 133)); 
     /* transform: translate(-60px); Center the circle */
@@ -18,8 +18,8 @@
 }
 
 .img {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     z-index: 1; 
 }
 
