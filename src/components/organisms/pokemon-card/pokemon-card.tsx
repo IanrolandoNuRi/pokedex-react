@@ -70,4 +70,5 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   );
 };
 
+// KF & IN
 export default PokemonCard;
