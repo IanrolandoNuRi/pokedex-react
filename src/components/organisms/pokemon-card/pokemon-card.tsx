@@ -1,29 +1,45 @@
 import React from 'react';
 import styles from './pokemon-card.module.css';
-import { typeBackgroundColors } from '../../../types/typeColors';
+import { cardTypesColors, typeBackgroundColors, typeColors, PokemonType } from '../../../types/typeColors';
 import ImageWithBackground from '../../molecules/image-with-background/image-with-background';
 import TextCard from '../../atoms/text-card/text-card';
 import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
 
-// interface PokemonDetail {
-//   id: number;
-//   abilities: string[];
-//   height: number;
-//   name: string;
-//   types: string[];
-//   weight: number;
-// }
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
-  <div className={styles.pokemonAttribute}>
+  <div className={styles.attribute}>
+    <TextCard content={label} fontWeight="bold" headingLevel='h6'/>
+    <TextCard content={value} headingLevel='h6'/>
+  </div>
+);
+
+const PokemonAttributesList = ({ label, values }: { label: string, values: string[] }) => (
+  <div >
     <TextCard content={label} fontWeight="bold"/>
-    <TextCard content={value}/>
+    {values.map((value, index) => (
+      <TextCard key={index} content={value} textTransform='capitalize'/>
+    ))}
   </div>
 );
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+  const pokemonType: PokemonType = pokemon.name === 'jigglypuff' ? 'fairy' : pokemon.types[0] as PokemonType;
+ 
   const cardStyle = {
-    borderColor: typeBackgroundColors[pokemon.types[0]],
+    borderColor: cardTypesColors[pokemonType]?.pokemon_type || '#FFF',
+    backgroundColor: cardTypesColors[pokemonType]?.background || '#FFF',
+  };
+  const attributeStyle = {
+    backgroundColor: cardTypesColors[pokemonType]?.background_attribute || '#FFF',
+    color: cardTypesColors[pokemonType]?.attribute_color || '#FFF',
+  };
+  const attributesStyle = {
+    // backgroundColor: cardTypesColors[pokemonType]?.background_attribute || '#FFF',
+    background: `linear-gradient(
+                  135deg,
+                  ${cardTypesColors[pokemonType]?.primary_background_attributes_list || '#FFF'} 0%,
+                  ${cardTypesColors[pokemonType]?.secondary_background_attributes_list || '#FFF'} 100%)`,
+    color: cardTypesColors[pokemonType]?.attributes_color || '#FFF',
   };
 
   return (
@@ -39,14 +55,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         <div className={styles.imageContainer}>
           <ImageWithBackground pokemonId={pokemon.id} />
         </div>
-        <div className={styles.attribute}>
-          <PokemonAttribute label="Height:&nbsp;" value={String(pokemon.height/10) + " m."} />
-          <PokemonAttribute label="Weight:&nbsp;" value={String(pokemon.weight/10) + " kg."} />
+        <div className={styles.pokemonAttribute} style={attributeStyle}>
+          <PokemonAttribute label="Height:" value={String(pokemon.height/10) + " m."} />
+          <PokemonAttribute label="Weight:" value={String(pokemon.weight/10) + " kg."} />
         </div>
-        <div className={styles.example}>
-          <PokemonAttribute label="Abilities:" value={
+        <div className={styles.pokemonAttributesList}  style={attributesStyle}>
+          <PokemonAttributesList label="Abilities:" values={
             pokemon.abilities.map((ability:string) => ability)} />
-          <PokemonAttribute label="Types:" value={
+          <PokemonAttributesList label="Types:" values={
             pokemon.types.map((type:string) => type)} />
         </div>
       </div>
@@ -54,4 +70,5 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   );
 };
 
+// KF & IN
 export default PokemonCard;

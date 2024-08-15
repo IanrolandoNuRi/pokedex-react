@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
 import styles from './pokedex-dashboard.module.css';
 import PokemonCard from '../pokemon-card/pokemon-card';
-import TextCard from '../../atoms/text-card/text-card';
 
 interface PokemonDetail {
   id: number;
