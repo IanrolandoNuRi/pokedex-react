@@ -1,0 +1,12 @@
+.no-drag {
+    cursor: default;
+    user-select: none; /* Prevents text selection */
+}
+
+.img {
+    width: 130px;
+    height: 130px;
+    z-index: 1;
+    cursor: default;
+    user-select: none;
+}
