@@ -19,7 +19,6 @@ interface ImageWithBackgroundComponentProps {
       <div className={styles.container} style={cardStyle}>
         <ImageComponent
             pokemonId={pokemonId}
-            className={styles.img}
         />
         <div className={styles.circle}></div>
       </div>

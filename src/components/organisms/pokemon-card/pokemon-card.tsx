@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './pokemon-card.module.css';
-import { cardTypesColors, typeBackgroundColors, typeColors, PokemonType } from '../../../types/typeColors';
+import { cardTypesColors, PokemonType } from '../../../types/typeColors';
 import ImageWithBackground from '../../molecules/image-with-background/image-with-background';
 import TextCard from '../../atoms/text-card/text-card';
 import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
+import { PokemonDetail } from '../../../types/pokemonTypes';
 
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
@@ -21,6 +22,9 @@ const PokemonAttributesList = ({ label, values }: { label: string, values: strin
     ))}
   </div>
 );
+interface PokemonCardProps {
+  pokemon: PokemonDetail;
+}
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   const pokemonType: PokemonType = pokemon.name === 'jigglypuff' ? 'fairy' : pokemon.types[0] as PokemonType;
@@ -28,6 +32,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   const cardStyle = {
     borderColor: cardTypesColors[pokemonType]?.pokemon_type || '#FFF',
     backgroundColor: cardTypesColors[pokemonType]?.background || '#FFF',
+    // pointerEvents: 'none'
   };
   const attributeStyle = {
     backgroundColor: cardTypesColors[pokemonType]?.background_attribute || '#FFF',

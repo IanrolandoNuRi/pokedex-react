@@ -26,7 +26,9 @@ const TextCard: React.FC<TextCardProps> = ({
         color,
         textTransform,
         headingLevel,
-        fontWeight
+        fontWeight,
+        cursor: "default",
+        userSelect: "none",
     };
 
     return (
