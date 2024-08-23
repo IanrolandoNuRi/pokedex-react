@@ -14,7 +14,7 @@
     background: radial-gradient(circle, rgb(255, 255, 255), rgb(126, 127, 133)); 
     /* transform: translate(-60px); Center the circle */
     border-radius: 50%; /* Creates the circle shape */
-    z-index: 0; /* Ensure the circle is behind the image */
+    z-index: 1; /* Ensure the circle is behind the image */
 }
 
 

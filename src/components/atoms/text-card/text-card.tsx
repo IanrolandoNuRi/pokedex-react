@@ -9,6 +9,7 @@ interface TextCardProps {
     fontWeight?: 'bold' | 'normal';
     textTransform?: 'uppercase' | 'lowercase' | 'capitalize';
     headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    cursor?: string
 }
 
 const TextCard: React.FC<TextCardProps> = ({ 
@@ -28,7 +29,6 @@ const TextCard: React.FC<TextCardProps> = ({
         headingLevel,
         fontWeight,
         cursor: "default",
-        userSelect: "none",
     };
 
     return (
