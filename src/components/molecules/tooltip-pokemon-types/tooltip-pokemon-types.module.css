@@ -1,0 +1,17 @@
+.tooltip{
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: absolute;
+    background-color: white;
+    z-index: 3;
+    transition: all 0.3s ease; /* Smooth transitions */
+    top: 31px;
+    right: 0px;
+}
+
+.circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}

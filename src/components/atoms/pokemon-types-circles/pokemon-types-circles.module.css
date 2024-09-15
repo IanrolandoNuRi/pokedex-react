@@ -11,21 +11,3 @@
     height: 16px;
     border-radius: 50%;
 }
-
-.hoveredElement {
-    border: 1px solid #ccc;
-    padding: 10px;
-    position: absolute;
-    background-color: white;
-    z-index: 3;
-    transition: all 0.3s ease; /* Smooth transitions */
-  }
-
-  .hoveredElement:hover {
-    border: 1px solid #ccc;
-    padding: 10px;
-    position: absolute;
-    background-color: white;
-    z-index: 3;
-    transition: all 0.3s ease;
-  }
