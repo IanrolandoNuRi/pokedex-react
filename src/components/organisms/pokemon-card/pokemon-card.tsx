@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './pokemon-card.module.css';
 import { cardTypesColors, PokemonType } from '../../../types/typeColors';
 import ImageWithBackground from '../../molecules/image-with-background/image-with-background';
 import TextCard from '../../atoms/text-card/text-card';
 import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
 import { PokemonDetail } from '../../../types/pokemonTypes';
+import Tooltip from '../../molecules/tooltip-pokemon-types/tooltip-pokemon-types';
 
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
@@ -27,6 +28,20 @@ interface PokemonCardProps {
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+
+  const [isTooltipVisible, setTooltipVisible] = useState(false); // Estado para controlar la visibilidad del Tooltip
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 }); // Posición del Tooltip
+
+  const handleMouseEnterToolTip = (event: React.MouseEvent) => {
+    setTooltipVisible(true);
+    const { clientX, clientY } = event;
+    setTooltipPosition({ x: clientX, y: clientY });
+  };
+
+  const handleMouseLeaveToolTip = () => {
+    setTooltipVisible(false);
+  };
+
   const pokemonType: PokemonType = pokemon.name === 'jigglypuff' ? 'fairy' : pokemon.types[0] as PokemonType;
  
   const cardStyle = {
@@ -52,9 +67,15 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
       <div className={styles.pokemonCardGrid}>
         <div className={styles.headerCardGrid}>
           <TextCard content={`#${pokemon.id}`} headingLevel="h5"/>
-          <ColorCircles
-            circles={pokemon.types}
-          />
+          <div
+            onMouseEnter={handleMouseEnterToolTip}
+            onMouseLeave={handleMouseLeaveToolTip}
+          >
+            <ColorCircles circles={pokemon.types} />
+          </div>
+          {isTooltipVisible && (
+            <Tooltip circles={pokemon.types} />
+          )}
         </div>
         <TextCard content={pokemon.name} headingLevel="h3" alignment="center" textTransform="capitalize" />
         <div className={styles.imageContainer}>

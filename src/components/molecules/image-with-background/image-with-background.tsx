@@ -23,5 +23,5 @@ interface ImageWithBackgroundComponentProps {
         <div className={styles.circle}></div>
       </div>
       
-)}; 
+)};
   export default ImageWithBackground;
