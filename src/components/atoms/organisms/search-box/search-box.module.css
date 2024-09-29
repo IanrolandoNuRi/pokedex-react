@@ -1,0 +1,69 @@
+/* src/components/organisms/search-box/search-box.module.css */
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    /* Adds margin to separate it from other elements */
+    width: 100%;
+    max-width: 400px;
+    /* Restricts the width to avoid it being too wide */
+    position: relative;
+}
+
+input[type="text"] {
+    width: 100%;
+    /* Full width for the input */
+    padding: 12px 18px;
+    /* Comfortable padding for text input */
+    border-radius: 30px;
+    /* Rounded corners to match the card design */
+    border: 2px solid #ccc;
+    /* Light grey border initially */
+    font-size: 18px;
+    /* Consistent font size with the rest of the interface */
+    color: #333;
+    /* Dark text color for readability */
+    background-color: #f9f9f9;
+    /* Subtle background color */
+    outline: none;
+    /* Removes the default blue outline on focus */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover and focus states */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+}
+
+input[type="text"]::placeholder {
+    color: #999;
+    /* Lighter color for placeholder text */
+}
+
+input[type="text"]:hover {
+    border-color: #888;
+    /* Darker grey border on hover */
+}
+
+input[type="text"]:focus {
+    border-color: #ffcc00;
+    /* Yellow border to match the design when focused */
+    background-color: #fff;
+    /* White background on focus */
+    box-shadow: 0 6px 12px rgba(255, 204, 0, 0.2);
+    /* Yellow glow on focus */
+}
+
+input[type="text"]:focus::placeholder {
+    color: #bbb;
+    /* Lighter placeholder color on focus */
+}
+
+/* Responsive behavior */
+@media (max-width: 600px) {
+    input[type="text"] {
+        font-size: 16px;
+        /* Adjust font size for smaller screens */
+        padding: 10px 15px;
+        /* Smaller padding on mobile */
+    }
+}

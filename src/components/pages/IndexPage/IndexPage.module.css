@@ -1,11 +1,11 @@
 /* src/components/pages/IndexPage/IndexPage.module.css */
 .indexPage {
-    text-align: center;
-    background-color: #000000;
-  }
-  
-  .indexPage h1 {
-    color: #333;
-  }
+  text-align: center;
+  background-color: #000000;
+  /* background-color: #ffffff; */
+}
 
-  
+.indexPage h1 {
+  color: #333;
+  /* color: #fff; */
+}
