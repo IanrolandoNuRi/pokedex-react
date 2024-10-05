@@ -1,0 +1,140 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90%;
+    /* Adjusted to be responsive */
+    width: 800px;
+    /* Fixed width */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    /* Changed to column for better layout */
+    justify-content: center;
+    animation: modal-fade-in 0.3s ease-in-out;
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.modal-close:hover {
+    color: red;
+}
+
+/* Fade-in Animation */
+@keyframes modal-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Container for the Card */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* Card Style */
+.card {
+    display: flex;
+    width: 800px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Image Section */
+.card-image {
+    width: 50%;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image img {
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Info Section */
+.card-info {
+    padding: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-info h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.card-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.card-info .attributes {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        /* Adjust for smaller screens */
+        width: 100%;
+        /* Full width for mobile */
+    }
+
+    .card {
+        flex-direction: column;
+        width: 100%;
+        /* Full width on mobile */
+    }
+
+    .card-image,
+    .card-info {
+        width: 100%;
+        /* Full width for mobile */
+    }
+}

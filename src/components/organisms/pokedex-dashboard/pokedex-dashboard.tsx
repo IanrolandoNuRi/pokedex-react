@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
 import styles from './pokedex-dashboard.module.css';
 import PokemonCard from '../pokemon-card/pokemon-card';
+import ModalDetailed from '../modal-detail/modal-detail';
 
 interface PokemonDetail {
   id: number;
@@ -15,6 +16,15 @@ interface PokemonDetail {
 const Pokedex: React.FC = () => {
   const [pokemonDetails, setPokemonDetails] = useState<PokemonDetail[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetail | null>(null); // State for selected Pokémon
+
+  const openModal = (pokemon: PokemonDetail) => {
+    setSelectedPokemon(pokemon);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
+
 
   useEffect(() => {
     const fetchPokedexData = async () => {
@@ -62,17 +72,16 @@ const Pokedex: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* 
-      This should be move to another page or template
-      <TextCard
-        content={"kanto pokedex"}
-        headingLevel='h2'
-        alignment='center'
-        textTransform='capitalize'
-      /> */}
       {memoizedPokemonDetails.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))}
+        <PokemonCard key={pokemon.id} pokemon={pokemon} onClick={() => openModal(pokemon)} />
+      ))}
+      {isModalOpen && selectedPokemon && (
+        <ModalDetailed
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          selectedPokemon={selectedPokemon} // Pass selected Pokémon to modal
+        />
+      )}
     </div>
   );
 };
