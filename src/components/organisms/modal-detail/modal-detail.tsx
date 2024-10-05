@@ -23,7 +23,6 @@ const ModalDetailed: React.FC<ModalProps> = ({ isOpen, onClose, selectedPokemon 
     const [description, setDescription] = useState<string | null>(null);
     useEffect(() => {
 
-
         const handleEscape = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 onClose();
@@ -46,7 +45,6 @@ const ModalDetailed: React.FC<ModalProps> = ({ isOpen, onClose, selectedPokemon 
                 } else {
                     setDescription("No flavor text available in the specified language.");
                 }
-                // const kantoPokedex = pokedexData.results.find((pokedex: { name: string }) => pokedex.name === 'kanto');
             } catch (error) {
                 setError('Failed to fetch Pokedex data');
             }

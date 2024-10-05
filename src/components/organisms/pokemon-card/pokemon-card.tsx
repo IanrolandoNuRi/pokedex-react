@@ -10,32 +10,30 @@ import Tooltip from '../../molecules/tooltip-pokemon-types/tooltip-pokemon-types
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (
   <div className={styles.attribute}>
-    <TextCard content={label} fontWeight="bold" headingLevel='h6'/>
-    <TextCard content={value} headingLevel='h6'/>
+    <TextCard content={label} fontWeight="bold" headingLevel='h6' />
+    <TextCard content={value} headingLevel='h6' />
   </div>
 );
 
 const PokemonAttributesList = ({ label, values }: { label: string, values: string[] }) => (
   <div >
-    <TextCard content={label} fontWeight="bold"/>
+    <TextCard content={label} fontWeight="bold" />
     {values.map((value, index) => (
-      <TextCard key={index} content={value} textTransform='capitalize'/>
+      <TextCard key={index} content={value} textTransform='capitalize' />
     ))}
   </div>
 );
 interface PokemonCardProps {
   pokemon: PokemonDetail;
+  onClick?: () => void;
 }
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, onClick }) => {
 
-  const [isTooltipVisible, setTooltipVisible] = useState(false); // Estado para controlar la visibilidad del Tooltip
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 }); // Posición del Tooltip
+  const [isTooltipVisible, setTooltipVisible] = useState(false);
 
-  const handleMouseEnterToolTip = (event: React.MouseEvent) => {
+  const handleMouseEnterToolTip = () => {
     setTooltipVisible(true);
-    const { clientX, clientY } = event;
-    setTooltipPosition({ x: clientX, y: clientY });
   };
 
   const handleMouseLeaveToolTip = () => {
@@ -43,7 +41,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   };
 
   const pokemonType: PokemonType = pokemon.name === 'jigglypuff' ? 'fairy' : pokemon.types[0] as PokemonType;
- 
+
   const cardStyle = {
     borderColor: cardTypesColors[pokemonType]?.pokemon_type || '#FFF',
     backgroundColor: cardTypesColors[pokemonType]?.background || '#FFF',
@@ -63,10 +61,10 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   };
 
   return (
-    <div className={styles.card} style={cardStyle}>
+    <div className={styles.card} style={cardStyle} onClick={onClick}>
       <div className={styles.pokemonCardGrid}>
         <div className={styles.headerCardGrid}>
-          <TextCard content={`#${pokemon.id}`} headingLevel="h5"/>
+          <TextCard content={`#${pokemon.id}`} headingLevel="h5" />
           <div
             onMouseEnter={handleMouseEnterToolTip}
             onMouseLeave={handleMouseLeaveToolTip}
@@ -82,14 +80,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
           <ImageWithBackground pokemonId={pokemon.id} />
         </div>
         <div className={styles.pokemonAttribute} style={attributeStyle}>
-          <PokemonAttribute label="Height:" value={String(pokemon.height/10) + " m."} />
-          <PokemonAttribute label="Weight:" value={String(pokemon.weight/10) + " kg."} />
+          <PokemonAttribute label="Height:" value={String(pokemon.height / 10) + " m."} />
+          <PokemonAttribute label="Weight:" value={String(pokemon.weight / 10) + " kg."} />
         </div>
-        <div className={styles.pokemonAttributesList}  style={attributesStyle}>
+        <div className={styles.pokemonAttributesList} style={attributesStyle}>
           <PokemonAttributesList label="Abilities:" values={
-            pokemon.abilities.map((ability:string) => ability)} />
+            pokemon.abilities.map((ability: string) => ability)} />
           <PokemonAttributesList label="Types:" values={
-            pokemon.types.map((type:string) => type)} />
+            pokemon.types.map((type: string) => type)} />
         </div>
       </div>
     </div>
