@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './image-with-background.module.css';
-import ImageComponent from '../../atoms/pokemon-image/pokemon-image';
+import ImageComponent from '../../organisms/pokemon-image/pokemon-image';
 
 interface ImageWithBackgroundComponentProps {
   pokemonId: number;

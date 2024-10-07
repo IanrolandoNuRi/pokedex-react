@@ -13,8 +13,11 @@ interface PokemonDetail {
   weight: number;
 }
 
-const Pokedex: React.FC = () => {
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonDetail[]>([]);
+interface PokedexDashboardProps {
+  pokemonDetails: PokemonDetail[];
+}
+
+const Pokedex: React.FC<PokedexDashboardProps> = ({ pokemonDetails }) => {
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetail | null>(null); // State for selected Pokémon
@@ -48,7 +51,6 @@ const Pokedex: React.FC = () => {
             };
           });
 
-          setPokemonDetails(detailedPokemon);
         } else {
           setError('Kanto Pokedex not found');
         }
