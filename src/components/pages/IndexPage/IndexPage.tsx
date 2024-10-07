@@ -2,8 +2,8 @@ import React, { useEffect, useState, useMemo } from 'react';
 import styles from './IndexPage.module.css';
 import myImage from '../../../assets/img/pokedex-title.png';
 import { getPokedex, getKantoPokedex, getAllPokemonDetails } from '../../../services/pokeapi';
-import SearchBox from '../../atoms/organisms/search-box/search-box';
-import PokedexDashboard from '../../atoms/organisms/pokedex-dashboard/pokedex-dashboard';
+import SearchBox from '../../organisms/search-box/search-box';
+import PokedexDashboard from '../../organisms/pokedex-dashboard/pokedex-dashboard';
 
 interface PokemonDetail {
   id: number;

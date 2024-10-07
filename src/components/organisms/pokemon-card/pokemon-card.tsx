@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styles from './pokemon-card.module.css';
-import { cardTypesColors, PokemonType } from '../../../../types/typeColors';
-import ImageWithBackground from '../../../molecules/image-with-background/image-with-background';
-import TextCard from '../../text-card/text-card';
-import ColorCircles from '../../pokemon-types-circles/pokemon-types-circles';
-import { PokemonDetail } from '../../../../types/pokemonTypes';
-import Tooltip from '../../../molecules/tooltip-pokemon-types/tooltip-pokemon-types';
+import { cardTypesColors, PokemonType } from '../../../types/typeColors';
+import ImageWithBackground from '../../molecules/image-with-background/image-with-background';
+import TextCard from '../../atoms/text-card/text-card';
+import ColorCircles from '../../atoms/pokemon-types-circles/pokemon-types-circles';
+import { PokemonDetail } from '../../../types/pokemonTypes';
+import Tooltip from '../../molecules/tooltip-pokemon-types/tooltip-pokemon-types';
 
 
 const PokemonAttribute = ({ label, value }: { label: string, value: string }) => (

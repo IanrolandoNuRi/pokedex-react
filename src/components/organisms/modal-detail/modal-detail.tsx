@@ -1,6 +1,6 @@
 import React, { useEffect, ReactNode, useState } from 'react';
 import styles from './modal-detail.module.css';
-import ImageComponent from '../../atoms/pokemon-image/pokemon-image';
+import ImageComponent from '../pokemon-image/pokemon-image';
 import { getPokemonSpecies } from '../../../services/pokeapi';
 
 interface PokemonDetail {
